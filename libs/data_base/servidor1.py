@@ -94,20 +94,21 @@ def servidor(listatemp):
 				name = "image\\"+lista["serial"][0]+".jpg"
 			elif sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
 				name = "image/"+lista["serial"][0]+".jpg"
-		
-			
 			cv2.imwrite(name,data_arr)	
+
 			#print('Se envió la confirmación ',text)
 			
 			
 			if listatemp[0].isAlive()==False:
 				return 0
-			#print("----------------------------->>>>",listatemp[1])
+		
 			if lista["status"][0]=="Riesgo Medio":
-				listatemp[1][0].addText(0,"   "+lista["serial"][0]+"        "+lista["status"][0]+"      "+lista["date"][0])
+				listatemp[1][0].addText(0,"   "+lista["serial"][0]+"                      "+lista["status"][0]+"               "+lista["date"][0],listatemp[2])
+			elif lista["status"][0]=="Riesgo Bajo":
+				listatemp[1][0].addText(0,"   "+lista["serial"][0]+"                      "+lista["status"][0]+"                 "+lista["date"][0],listatemp[2])
 			else:
-				listatemp[1][0].addText(0,"   "+lista["serial"][0]+"        "+lista["status"][0]+"          "+lista["date"][0])
-			
+				listatemp[1][0].addText(0,"   "+lista["serial"][0]+"                      "+lista["status"][0]+"                  "+lista["date"][0],listatemp[2])
+			listatemp[2]+=1
 			#listatemp[1][0].addText(1,lista["status"][0])
 			#listatemp[1][0].addText(2,lista["date"][0])		
 		finally:

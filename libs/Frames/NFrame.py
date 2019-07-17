@@ -116,7 +116,7 @@ class NFrame(Frame):
 		self.__list_listbox[index].configure(selectmode=SINGLE)
 		self.__list_listbox[index].bind('<Double-1>',self.__openImage)
 
-	def __Error(self,error="Se produjo un error"):
+	def Error(self,error="Se produjo un error"):
 		Ventana2 = Toplevel(self.master)
 		Ventana2.configure(height=100,width=260,bg="#4a4a4a")
 		Ventana2.title("Error")
@@ -139,14 +139,14 @@ class NFrame(Frame):
 				im=cv2.imread(root)
 				cv2.imshow("image",im)
 		except Exception as e:
-			self.__Error("Error al cargar la imagen")
+			self.Error("Error al cargar la imagen")
 
 	
 
 	#add texto en pantalla		
 	def addText(self,x,text,n):
 		self.__list_listbox[x].insert(END,text)
-		if (n+1)%2==0:
+		if (n+2)%2==0:
 			self.__list_listbox[x].itemconfigure(n,bg="#696969")
 	def retTextBox(self,x):
 		return self.__list_listbox[x]
@@ -170,7 +170,7 @@ class NFrame(Frame):
 			
 			return nbutton
 		except Exception as e:
-			self.__Error("Error al cargar Texturas")
+			self.Error("Error al cargar Texturas")
 			return -1
 	
 		
@@ -213,7 +213,7 @@ class NFrame(Frame):
 			backbutton3.pack(side=RIGHT)
 		except Exception as e:
 			Ventana2.destroy()
-			self.__Error("Se produjo un error al cargar")
+			self.Error("Se produjo un error al cargar")
 
 	def yview(self, *args):
 			self.listbox1.yview(*args)
@@ -291,7 +291,7 @@ class NFrame(Frame):
 			searchButton.place(x=324,y=155)
 		except Exception as e:
 			Ventana2.destroy()
-			self.__Error("Se produjo un error al cargar")
+			self.Error("Se produjo un error al cargar")
 		
 		
 

@@ -29,18 +29,10 @@ def InterfazThread():
 	StatusFrame=NFrame(root,False)
 	StatusFrame.ConfigureF(668,480,12,73,"#4a4a4a")
 	StatusFrame.addListBox(ax=93,ay=23,x=10,y=0,bg="#4a4a4a")
-	StatusFrame.addText(0,"   Serial Number            Status                         Date",0)
+	StatusFrame.addText(0,"   Serial Number            Status                         Date",1)
 	StatusFrame.clickEventListbox(0)
 	apuntadorStatusFrame.append(StatusFrame)
-	asca=ManagementJson("Helloword.json")
-	lista=asca.intervaloIF(0,50)
-	for t in range(0,50):
-		if lista["status"][t]=="Riesgo Medio":
-			StatusFrame.addText(0,"   "+lista["serial"][t]+"                      "+lista["status"][t]+"               "+lista["date"][t],t)
-		elif lista["status"][t]=="Riesgo Bajo":
-			StatusFrame.addText(0,"   "+lista["serial"][t]+"                      "+lista["status"][t]+"                 "+lista["date"][t],t)
-		else:
-			StatusFrame.addText(0,"   "+lista["serial"][t]+"                      "+lista["status"][t]+"                  "+lista["date"][t],t)
+
 	ButtonsFrame=NFrame(root,False,True)
 	ButtonsFrame.ConfigureF(413,517,680,36,"#4a4a4a")	
 	if ButtonsFrame.addButtonI((0,0,206,109),30,40,1)!=-1:
@@ -55,7 +47,7 @@ def InterfazThread():
 
 def servidorM():
 	global T1,listaactual
-	#servidor([T1,apuntadorStatusFrame])
+	servidor([T1,apuntadorStatusFrame,0])
 
 
 

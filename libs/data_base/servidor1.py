@@ -78,7 +78,7 @@ def servidor(listatemp):
 				asca.addError("Riesgo Alto")
 				severity="Riesgo Alto"
 				#Cadena a enviar por mensaje de texto
-				AWS("High damage")
+				#AWS("High damage")
 			
 			lista=asca.ultimosN(1)
 			#FireBase

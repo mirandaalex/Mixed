@@ -1,4 +1,4 @@
-import json
+from json import load, dump
 import sys
 from datetime import datetime
 #obasd=ManagementJson()
@@ -27,7 +27,7 @@ class ManagementJson(object):
 	def loadFile(self,root):
 		try:
 			data_file=open(root,"r") 
-			data=json.load(data_file)
+			data=load(data_file)
 			self.synchronizeSize(len(data["serial"]))
 			data_file.close
 		except Exception as e:
@@ -40,7 +40,7 @@ class ManagementJson(object):
 	def addError(self,status,pos=0):
 		today = datetime.now()
 		data_file=open(self.root,"r")
-		data=json.load(data_file)
+		data=load(data_file)
 		self.plusSize()
 		#Si esta vacio incia la serializacion en 000000
 		if int(len(data["serial"]))==0:
@@ -69,7 +69,7 @@ class ManagementJson(object):
 	#elimina un elemento determinado por su serial, si falla regresa 0
 	def delError(self,serial):
 		data_file=open(self.root,"r")
-		data=json.load(data_file)
+		data=load(data_file)
 		if int(len(data["serial"]))!=0:
 			cont=0
 			for temp in data["serial"]:
@@ -91,14 +91,14 @@ class ManagementJson(object):
 	#Carga todos los elementos de un documento y los regresa como un diccionario{"elemento":[lista],"elemento2":[],....}
 	def loadList(self):
 		data_file=open(self.root,"r")
-		data=json.load(data_file)
+		data=load(data_file)
 		data_file.close
 		return data
 
 	#Busca un elemento en especifico y si lo encuentra los regresa como lista [dato 1, dato 2, ....], si falla regresa 0
 	def searchError(self,serial):
 		data_file=open(self.root,"r")
-		data=json.load(data_file)
+		data=load(data_file)
 		if int(len(data["serial"]))!=0:
 			cont=0
 			for temp in data["serial"]:
@@ -112,7 +112,7 @@ class ManagementJson(object):
 	#Busca los ultimos N elementos de un archivo y lo regresa como un diccionario{"elemento":[lista],"elemento2":[],....}, si falla regresa 0
 	def ultimosN(self,N):
 		data_file=open(self.root,"r")
-		data=json.load(data_file)
+		data=load(data_file)
 		A=len(data["serial"])-N
 		if A<0:
 			A=0
@@ -130,7 +130,7 @@ class ManagementJson(object):
 	#Busca un intervalo con inicio I y final F y lo regresa como un diccionario{"elemento":[lista],"elemento2":[],....}, si falla regresa 0
 	def intervaloIF(self,I,F):
 		data_file=open(self.root,"r")
-		data=json.load(data_file)
+		data=load(data_file)
 		F+=1
 		if F<I:
 			local=I

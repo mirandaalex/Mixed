@@ -6,12 +6,9 @@ Created on Thu May  9 12:44:13 2019
 @author: Del Valle
 """
 import numpy as np
-import socket,cv2
+import socket
 import sys,pickle
-import matplotlib.pyplot as plt
-from PIL import Image
 from libs.data_base.SaveDataJSON import *
-from threading import Thread
 from libs.AWS.smsaws import *
 #from libs.data_base.firebaseadd import *
 def servidor(listatemp):
@@ -99,16 +96,13 @@ def servidor(listatemp):
 			#print('Se envió la confirmación ',text)
 			
 			
-			if listatemp[0].isAlive()==False:
-				return 0
-		
 			if lista["status"][0]=="Riesgo Medio":
-				listatemp[1][0].addText(0,"   "+lista["serial"][0]+"                      "+lista["status"][0]+"               "+lista["date"][0],listatemp[2])
+				listatemp[0][0].addText(0,"   "+lista["serial"][0]+"                      "+lista["status"][0]+"               "+lista["date"][0],listatemp[1])
 			elif lista["status"][0]=="Riesgo Bajo":
-				listatemp[1][0].addText(0,"   "+lista["serial"][0]+"                      "+lista["status"][0]+"                 "+lista["date"][0],listatemp[2])
+				listatemp[0][0].addText(0,"   "+lista["serial"][0]+"                      "+lista["status"][0]+"                 "+lista["date"][0],listatemp[1])
 			else:
-				listatemp[1][0].addText(0,"   "+lista["serial"][0]+"                      "+lista["status"][0]+"                  "+lista["date"][0],listatemp[2])
-			listatemp[2]+=1
+				listatemp[0][0].addText(0,"   "+lista["serial"][0]+"                      "+lista["status"][0]+"                  "+lista["date"][0],listatemp[1])
+			listatemp[1]+=1
 			#listatemp[1][0].addText(1,lista["status"][0])
 			#listatemp[1][0].addText(2,lista["date"][0])		
 		finally:
